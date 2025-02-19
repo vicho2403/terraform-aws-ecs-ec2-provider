@@ -1,0 +1,37 @@
+definitions = {
+  "my-app" = {
+    cpu = 1024
+    memory = 512
+    desired_count = 1
+    public = true
+    containers = [
+      {
+        name = "my-app",
+        image = "image:latest"
+        port = 80
+        protocol = "tcp"
+        load_balancer = {
+          priority = 1
+          health = "/health"
+          paths = [
+            "/*"
+          ]
+        }
+      }
+    ] 
+  }
+}
+asg_max_size = 1
+asg_min_size = 1
+certificate_arn = "arn:aws:acm:<AWS_REGION>:<AWS_ACCOUNT_ID>:certificate/<CERTIFICATE_HASH>"
+project_name = "my-project-name"
+environment = "dev"
+node_instance_type = "t3.small"
+instance_key = "my-key-pair"
+aws_region = "eu-west-1"
+cidr = "10.176.32.0/20"
+public_cidrs = [ "10.176.32.0/24", "10.176.33.0/24" ]
+private_cidrs = [ "10.176.34.0/24", "10.176.35.0/24" ]
+database_cidrs = [ "10.176.36.0/24", "10.176.37.0/24" ]
+public = true
+network_mode = "bridge"
